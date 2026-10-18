@@ -1,21 +1,213 @@
 <!DOCTYPE html>
 <html lang="en">
+<head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#0e0e0e">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#d9c4c0">
 <title>ParKuma</title>
 <meta name="description" content="All of ParKuma's links in one place.">
+<meta property="og:title" content="ParKuma">
+<meta property="og:description" content="All of ParKuma's links in one place.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%92%97%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
 <style>
-  body { margin: 0; min-height: 100dvh; display: grid; place-content: center; gap: 12px;
-         background: #0e0e0e; font: 600 1rem "Segoe UI", Roboto, sans-serif; }
-  a { width: min(300px, 86vw); padding: 14px; text-align: center; color: #f2f2f2;
-      background: #1a1a1a; border: 1.5px solid #2e2e2e; border-radius: 10px; text-decoration: none; }
-  a:hover, a:focus-visible { background: #242424; border-color: #8a8a8a; outline: none; }
+  :root {
+    --bg: #d9c4c0;
+    --ink: #4a3237;
+    --paper: #fff3f0;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; background: var(--bg); }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    color: var(--ink);
+    font-family: "Nunito", "Segoe UI", Roboto, system-ui, -apple-system, sans-serif;
+    padding: max(32px, env(safe-area-inset-top)) max(20px, env(safe-area-inset-right))
+             max(36px, env(safe-area-inset-bottom)) max(20px, env(safe-area-inset-left));
+    background:
+      radial-gradient(70% 45% at 50% 0%, rgba(255, 158, 192, .3), transparent 70%),
+      radial-gradient(70% 40% at 50% 100%, rgba(255, 224, 102, .22), transparent 70%),
+      var(--bg);
+    -webkit-tap-highlight-color: transparent;
+    overflow-x: hidden;
+  }
+
+  /* floating hearts and stars */
+  #floaters { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+  #floaters i {
+    position: absolute;
+    bottom: -40px;
+    font-style: normal;
+    opacity: 0;
+    animation: floatUp linear infinite;
+  }
+  @keyframes floatUp {
+    0%   { transform: translateY(0) rotate(0deg); opacity: 0; }
+    10%  { opacity: .6; }
+    90%  { opacity: .6; }
+    100% { transform: translateY(-110vh) rotate(40deg); opacity: 0; }
+  }
+
+  main { position: relative; z-index: 1; width: 100%; max-width: 340px; margin: auto; text-align: center; }
+
+  h1 {
+    margin: 0 0 26px;
+    font-size: clamp(2rem, 8vw, 2.6rem);
+    font-weight: 900;
+    color: #c93a68;
+    text-shadow: 0 3px 0 rgba(255, 255, 255, .25);
+  }
+
+  nav { display: flex; flex-direction: column; gap: 16px; }
+
+  a.link {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-height: 58px;
+    padding: 12px 22px;
+    color: var(--ink);
+    background: var(--c);
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: 800;
+    border-radius: 999px;
+    box-shadow: 0 6px 0 var(--d), 0 12px 20px rgba(150, 80, 90, .22);
+    touch-action: manipulation;
+    transition: transform .22s cubic-bezier(.34,1.56,.64,1), box-shadow .22s;
+    animation: pop .6s cubic-bezier(.34,1.56,.64,1) both;
+    animation-delay: calc(var(--i) * 80ms + 150ms);
+  }
+  a.link .ic { font-size: 1.2rem; line-height: 1; }
+  @media (hover: hover) {
+    a.link:hover { transform: translateY(-4px) rotate(-1.2deg) scale(1.03); box-shadow: 0 10px 0 var(--d), 0 18px 26px rgba(150, 80, 90, .26); }
+  }
+  a.link:active { transform: translateY(4px) scale(.98); box-shadow: 0 2px 0 var(--d), 0 4px 10px rgba(150, 80, 90, .22); }
+  a.link:focus-visible { outline: 3px dashed #c93a68; outline-offset: 4px; }
+
+  @keyframes pop { from { opacity: 0; transform: translateY(24px) scale(.8); } to { opacity: 1; transform: none; } }
+
+  @media (min-width: 768px) {
+    main { max-width: 380px; }
+    a.link { min-height: 62px; font-size: 1.15rem; }
+  }
+  @media (min-width: 1200px) {
+    main { max-width: 480px; }
+    nav { gap: 20px; }
+    a.link { min-height: 74px; font-size: 1.3rem; gap: 14px; }
+    a.link .ic { font-size: 1.45rem; }
+    h1 { font-size: 3.4rem; margin-bottom: 34px; }
+  }
+  @media (min-width: 1800px) {
+    main { max-width: 580px; }
+    nav { gap: 24px; }
+    a.link { min-height: 88px; font-size: 1.55rem; }
+    a.link .ic { font-size: 1.7rem; }
+    h1 { font-size: 4.2rem; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    a.link { animation: none; transition: none; }
+    #floaters { display: none; }
+  }
+  @media (forced-colors: active) {
+    a.link { border: 2px solid LinkText; }
+    #floaters { display: none; }
+  }
 </style>
-<a href="https://ko-fi.com/parkuma" target="_blank" rel="noopener">Support Me</a>
-<a href="https://www.patreon.com/ParKuma" target="_blank" rel="noopener">Patreon</a>
-<a href="https://www.instagram.com/parkuma_art" target="_blank" rel="noopener">Instagram</a>
-<a href="https://x.com/parkuma_art" target="_blank" rel="noopener">X (Twitter)</a>
-<a href="https://bsky.app/profile/parkuma.bsky.social" target="_blank" rel="noopener">BlueSky</a>
-<a href="https://www.youtube.com/@ParKuma" target="_blank" rel="noopener">YouTube</a>
-<a href="mailto:parkumaofficial@gmail.com">E-Mail</a>
+</head>
+<body>
+<div id="floaters" aria-hidden="true"></div>
+<main>
+  <nav id="links"></nav>
+</main>
+
+<script>
+  /* ===== EDIT HERE ONLY ===== */
+
+  // Optional title on top. Leave "" for none, or write "ParKuma".
+  const NAME = "";
+
+  // Each link is one line: { name: "Button text", url: "https://...", icon: "🎨" },
+  // ADD a link: copy one line and paste it below.
+  // DELETE a link: remove that whole line.
+  // EDIT a link: change the text inside the quotes.
+  // The icon is optional. Delete it, or put any emoji you like.
+  const LINKS = [
+    { name: "Support Me",  url: "https://ko-fi.com/parkuma",                     icon: "☕" },
+    { name: "Patreon",     url: "https://www.patreon.com/ParKuma",               icon: "🎨" },
+    { name: "Instagram",   url: "https://www.instagram.com/parkuma_art",         icon: "📷" },
+    { name: "X (Twitter)", url: "https://x.com/parkuma_art",                     icon: "🐦" },
+    { name: "BlueSky",     url: "https://bsky.app/profile/parkuma.bsky.social",  icon: "🦋" },
+    { name: "YouTube",     url: "https://www.youtube.com/@ParKuma",              icon: "▶️" },
+    { name: "E-Mail",      url: "mailto:parkumaofficial@gmail.com",              icon: "💌" },
+  ];
+
+  /* ===== DO NOT EDIT BELOW ===== */
+
+  const main = document.querySelector("main");
+  const nav = document.getElementById("links");
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (NAME) {
+    const h = document.createElement("h1");
+    h.textContent = NAME;
+    main.insertBefore(h, nav);
+  }
+
+  // pastel colours (main, shadow) used in rotation
+  const COLORS = [
+    ["#ff9ec0", "#f06b97"],
+    ["#ffb27a", "#f08a45"],
+    ["#ffe066", "#e6b800"],
+    ["#7be0b8", "#3cbf92"],
+    ["#7cc4ff", "#4a9de8"],
+  ];
+
+  LINKS.forEach(function (l, i) {
+    const a = document.createElement("a");
+    a.className = "link";
+    a.href = l.url;
+    a.style.setProperty("--i", i);
+    a.style.setProperty("--c", COLORS[i % COLORS.length][0]);
+    a.style.setProperty("--d", COLORS[i % COLORS.length][1]);
+    if (l.url.indexOf("mailto:") !== 0) { a.target = "_blank"; a.rel = "noopener"; }
+    if (l.icon) {
+      const ic = document.createElement("span");
+      ic.className = "ic";
+      ic.setAttribute("aria-hidden", "true");
+      ic.textContent = l.icon;
+      a.appendChild(ic);
+    }
+    const t = document.createElement("span");
+    t.textContent = l.name;
+    a.appendChild(t);
+    nav.appendChild(a);
+  });
+
+  // floating hearts and stars in the background
+  if (!reduce) {
+    const box = document.getElementById("floaters");
+    const shapes = ["♥", "★", "✦", "♥", "•"];
+    const tints = ["#f06b97", "#f08a45", "#e6b800", "#3cbf92", "#4a9de8"];
+    for (let i = 0; i < 18; i++) {
+      const s = document.createElement("i");
+      s.textContent = shapes[i % shapes.length];
+      s.style.left = Math.random() * 100 + "%";
+      s.style.fontSize = (12 + Math.random() * 18) + "px";
+      s.style.color = tints[i % tints.length];
+      s.style.animationDuration = (14 + Math.random() * 14) + "s";
+      s.style.animationDelay = (-Math.random() * 28) + "s";
+      box.appendChild(s);
+    }
+  }
+</script>
+</body>
+</html>
