@@ -1,127 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ParKuma | Webtoon Artist</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0e0e0e">
+<title>ParKuma</title>
 <meta name="description" content="All of ParKuma's links in one place.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;800;900&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --bg: #15121f;
-    --panel: #201b33;
-    --line: #3b3360;
-    --text: #f3effc;
-    --muted: #a59fc0;
-    --accent: #ff8fb1;
-  }
-  * { box-sizing: border-box; }
-  html, body { margin: 0; }
-  body {
-    min-height: 100vh;
-    min-height: 100dvh;
-    background: var(--bg);
-    color: var(--text);
-    font-family: "Nunito", system-ui, -apple-system, "Segoe UI", sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    padding: 56px 20px 40px;
-  }
-  /* comic halftone dots fading out from the top */
-  body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    z-index: -1;
-    pointer-events: none;
-    background-image: radial-gradient(var(--line) 1.6px, transparent 1.8px);
-    background-size: 20px 20px;
-    -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 0%, #000, transparent 75%);
-            mask-image: radial-gradient(ellipse 80% 70% at 50% 0%, #000, transparent 75%);
-    opacity: .7;
-  }
-  main { width: 100%; max-width: 440px; text-align: center; }
-  h1 { margin: 0; font-size: 2.2rem; font-weight: 900; letter-spacing: .01em; }
-  .bio { margin: 6px 0 30px; color: var(--muted); font-weight: 600; }
-  nav { display: flex; flex-direction: column; gap: 14px; }
-  a.link {
-    display: block;
-    padding: 16px 20px;
-    background: var(--panel);
-    color: var(--text);
-    text-decoration: none;
-    font-weight: 800;
-    font-size: 1.05rem;
-    border: 2px solid var(--line);
-    border-radius: 6px;
-    box-shadow: 4px 4px 0 var(--line);
-    transition: transform .12s, box-shadow .12s, border-color .12s;
-  }
-  a.link:hover, a.link:focus-visible {
-    transform: translate(-2px, -2px);
-    box-shadow: 6px 6px 0 var(--accent);
-    border-color: var(--accent);
-    outline: none;
-  }
-  a.link:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--accent); }
-
-  /* Desktop / large screens */
-  @media (min-width: 768px) {
-    body { align-items: center; padding: 48px 24px; }
-    main { max-width: 560px; }
-    h1 { font-size: 3.4rem; }
-    .bio { font-size: 1.2rem; margin: 8px 0 44px; }
-    nav { gap: 18px; }
-    a.link { padding: 22px 28px; font-size: 1.2rem; box-shadow: 6px 6px 0 var(--line); }
-    a.link:hover, a.link:focus-visible { box-shadow: 9px 9px 0 var(--accent); }
-  }
-  @media (prefers-reduced-motion: reduce) { a.link { transition: none; } }
+  body { margin: 0; min-height: 100dvh; display: grid; place-content: center; gap: 12px;
+         background: #0e0e0e; font: 600 1rem "Segoe UI", Roboto, sans-serif; }
+  a { width: min(300px, 86vw); padding: 14px; text-align: center; color: #f2f2f2;
+      background: #1a1a1a; border: 1.5px solid #2e2e2e; border-radius: 10px; text-decoration: none; }
+  a:hover, a:focus-visible { background: #242424; border-color: #8a8a8a; outline: none; }
 </style>
-</head>
-<body>
-<main>
-  <h1 id="name"></h1>
-  <p class="bio" id="bio"></p>
-  <nav id="links"></nav>
-</main>
-
-<script>
-  /* ===== EDIT HERE ONLY ===== */
-
-  const NAME = "ParKuma";
-  const BIO  = "Webcomic artist";
-
-  // Each link is one line: { name: "Button text", url: "https://..." },
-  // ADD a link: copy one line and paste it below.
-  // DELETE a link: remove that whole line.
-  // EDIT a link: change the text inside the quotes.
-  const LINKS = [
-    { name: "Support Me", url: "https://ko-fi.com/parkuma" },
-    { name: "Patreon", url: "https://www.patreon.com/ParKuma" },
-    { name: "Instagram",          url: "https://www.instagram.com/parkuma_art" },
-    { name: "X (Twitter)",        url: "https://x.com/parkuma_art" },
-    { name: "BlueSky",      url: "https://bsky.app/profile/parkuma.bsky.social" },
-    { name: "YouTube",       url: "https://www.youtube.com/@ParKuma" },
-    { name: "E-Mail", url: "mailto:parkumaofficial@gmail.com" },
-  ];
-
-  /* ===== DO NOT EDIT BELOW ===== */
-
-  document.getElementById("name").textContent = NAME;
-  document.getElementById("bio").textContent = BIO;
-  const nav = document.getElementById("links");
-  LINKS.forEach(function (l) {
-    const a = document.createElement("a");
-    a.className = "link";
-    a.href = l.url;
-    a.target = "_blank";
-    a.rel = "noopener";
-    a.textContent = l.name;
-    nav.appendChild(a);
-  });
-</script>
-</body>
-</html>
+<a href="https://ko-fi.com/parkuma" target="_blank" rel="noopener">Support Me</a>
+<a href="https://www.patreon.com/ParKuma" target="_blank" rel="noopener">Patreon</a>
+<a href="https://www.instagram.com/parkuma_art" target="_blank" rel="noopener">Instagram</a>
+<a href="https://x.com/parkuma_art" target="_blank" rel="noopener">X (Twitter)</a>
+<a href="https://bsky.app/profile/parkuma.bsky.social" target="_blank" rel="noopener">BlueSky</a>
+<a href="https://www.youtube.com/@ParKuma" target="_blank" rel="noopener">YouTube</a>
+<a href="mailto:parkumaofficial@gmail.com">E-Mail</a>
