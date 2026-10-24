@@ -3,19 +3,48 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="color-scheme" content="light">
-<meta name="theme-color" content="#fdf6f4">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#202743">
 <title>ParKuma</title>
 <meta name="description" content="All of ParKuma's links in one place.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%23e0557f'/%3E%3Ctext x='50' y='68' font-family='Nunito, sans-serif' font-size='52' font-weight='800' fill='%23fff6f8' text-anchor='middle'%3EP%3C/text%3E%3C/svg%3E">
+<meta property="og:type" content="website">
+<meta property="og:title" content="ParKuma">
+<meta property="og:description" content="All of ParKuma's links in one place.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%23202743'/%3E%3Ctext x='50' y='68' font-family='Nunito, sans-serif' font-size='52' font-weight='800' fill='%23ffffff' text-anchor='middle'%3EP%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@800&family=Nunito:wght@800&display=swap" rel="stylesheet">
 <style>
+  /* ================================================================
+     COLOUR SETTINGS — EVERY COLOUR YOU CAN CHANGE IS RIGHT HERE
+     ----------------------------------------------------------------
+     Change only the hex/rgba value after the colon. Nothing else.
+     ================================================================ */
+  :root {
+
+    /* ---- 1. WEBSITE BACKGROUND (gradient, top → bottom) ---- */
+    --bg-top:    #2b3559;   /* lighter colour at the TOP of the page */
+    --bg-bottom: #202743;   /* your base navy, at the BOTTOM        */
+
+    /* ---- 2. "ParKuma" TITLE ---- */
+    --title: #ffffff;       /* colour of the letters */
+
+    /* ---- 3. OUTLINE AROUND EVERY LINK BOX ---- */
+    --outline: rgba(255, 255, 255, .75);  /* border on all 7 links */
+
+  }
+  /* ================================================================
+     END OF COLOUR SETTINGS
+     Link button colours (--c and --t) are set per-link in the HTML below.
+     ================================================================ */
+
   * { box-sizing: border-box; }
 
+  /* Gradient sits on <html> so it paints the whole viewport directly —
+     no background-attachment:fixed (which janks on iOS) and no white
+     flash before load. */
   html {
-    background: #fdf6f4;
+    background: linear-gradient(180deg, var(--bg-top) 0%, var(--bg-bottom) 100%);
     -webkit-text-size-adjust: 100%;
     text-size-adjust: 100%;
   }
@@ -29,40 +58,27 @@
     justify-content: center;
     padding: max(32px, env(safe-area-inset-top)) max(20px, env(safe-area-inset-right))
              max(32px, env(safe-area-inset-bottom)) max(20px, env(safe-area-inset-left));
-    background:
-      radial-gradient(60% 50% at 12% 8%,  #ffe1ec 0%, transparent 70%),
-      radial-gradient(55% 45% at 88% 12%, #e0e9ff 0%, transparent 70%),
-      radial-gradient(55% 50% at 8% 92%,  #d8f5e8 0%, transparent 70%),
-      radial-gradient(60% 50% at 92% 88%, #fff4c4 0%, transparent 70%),
-      #fdf6f4;
-    color: #4a3237;
     font-family: "Nunito", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
     -webkit-tap-highlight-color: transparent;
   }
 
-  .wrap {
+  main {
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
   }
 
+  /* Title — plain text, no box */
   h1 {
     margin: 0 0 26px;
     text-align: center;
-    font-size: clamp(1.9rem, 7vw, 2.6rem);
+    font-family: "Baloo 2", "Nunito", system-ui, sans-serif;
+    font-size: clamp(2.2rem, 9vw, 3.2rem);
     font-weight: 800;
-    letter-spacing: .5px;
-    color: #e0557f;
-  }
-  @supports ((background-clip: text) or (-webkit-background-clip: text)) {
-    h1 {
-      background: linear-gradient(95deg, #e0557f, #e08a3c, #3fa87d, #4a7fd4, #8a5bd0);
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-      color: transparent;
-    }
+    line-height: 1.05;
+    letter-spacing: .2px;
+    color: var(--title);
   }
 
   /* Mobile first: single column */
@@ -74,8 +90,7 @@
     gap: 14px;
   }
 
-  /* Colours come from each link's own --c (background) and --t (text).
-     The fallbacks below are only used if a link is missing them. */
+  /* Each link sets its own --c (background) and --t (text) inline. */
   nav a {
     display: flex;
     align-items: center;
@@ -85,19 +100,27 @@
     text-align: center;
     text-decoration: none;
     font-weight: 800;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     line-height: 1.2;
-    color: var(--t, #a63a60);
-    background: var(--c, #ffe0e8);
-    border: 2px solid rgba(255, 255, 255, .75);
+    color: var(--t, #ffffff);
+    background: var(--c, #444444);
+    border: 2px solid var(--outline);
     border-radius: 999px;
-    box-shadow: 0 6px 16px rgba(180, 110, 130, .18);
-    transition: filter .15s ease, transform .15s ease;
   }
 
-  nav a:hover  { filter: brightness(.96); }
-  nav a:active { transform: scale(.98); }
-  nav a:focus-visible { outline: 3px solid var(--t, #a63a60); outline-offset: 3px; }
+  nav a:focus-visible {
+    outline: 3px solid currentColor;
+    outline-offset: 3px;
+  }
+
+  /* Motion only for users who haven't asked for less */
+  @media (prefers-reduced-motion: no-preference) {
+    nav a {
+      transition: filter .15s ease, transform .15s ease;
+    }
+    nav a:hover  { filter: brightness(.94); }
+    nav a:active { transform: scale(.98); }
+  }
 
   /* Tablet: two columns */
   @media (min-width: 700px) {
@@ -106,7 +129,7 @@
       grid-template-columns: 1fr 1fr;
       gap: 18px;
     }
-    nav a { min-height: 66px; font-size: 1.15rem; }
+    nav a { min-height: 66px; font-size: 1.2rem; }
   }
 
   /* Laptop / desktop */
@@ -115,24 +138,24 @@
     nav a {
       min-height: 78px;
       padding: 18px 26px;
-      font-size: 1.3rem;
+      font-size: 1.35rem;
     }
-    h1 { font-size: 3rem; margin-bottom: 34px; }
+    h1 { font-size: 3.8rem; margin-bottom: 34px; }
   }
 
   /* Large desktop */
   @media (min-width: 1800px) {
     nav { max-width: 1040px; gap: 26px; }
-    nav a { min-height: 92px; font-size: 1.5rem; }
-    h1 { font-size: 3.8rem; }
+    nav a { min-height: 92px; font-size: 1.55rem; }
+    h1 { font-size: 4.8rem; }
   }
 
   /* Short landscape screens */
   @media (max-height: 520px) and (orientation: landscape) {
     body { align-items: flex-start; padding-block: 20px; }
     nav { max-width: 820px; grid-template-columns: 1fr 1fr; gap: 12px; }
-    nav a { min-height: 50px; font-size: 1rem; }
-    h1 { font-size: 1.6rem; margin-bottom: 16px; }
+    nav a { min-height: 50px; font-size: 1.05rem; }
+    h1 { font-size: 1.9rem; margin-bottom: 16px; }
   }
 
   @media (forced-colors: active) {
@@ -141,41 +164,46 @@
 </style>
 </head>
 <body>
-<div class="wrap">
+<main>
   <h1>ParKuma</h1>
 
   <!-- ============================================================
-       EDIT ONLY THIS SECTION
+       LINK BUTTONS — EDIT HERE
        ------------------------------------------------------------
-       Each link is ONE line. To add a link: copy any line, paste it,
-       then change 3 things: the URL, the text, and the two colours.
-       To delete a link: delete its whole line.
-       To reorder: cut and paste lines.
+       Each link is ONE line:
+         --c = button background colour
+         --t = button text colour
+       The comment above each line names its current colour.
 
-       Colours: --c is the background, --t is the text colour.
-       Keep --t dark and --c light so the text stays readable.
-
-       Paste-ready palette:
-         pink      --c:#ffd6e2; --t:#b02a58
-         peach     --c:#ffe0c2; --t:#a44f16
-         yellow    --c:#fff3ba; --t:#8a6900
-         mint      --c:#c9f2de; --t:#15795a
-         sky blue  --c:#d5e7ff; --t:#1c5aa6
-         lavender  --c:#e6dcff; --t:#5b3aa8
-         coral     --c:#ffdcd0; --t:#a63a20
+       To ADD:    copy a line, paste it, change URL, text and colours.
+       To DELETE: delete the whole line.
+       To RECOLOUR: change --c (background) and --t (text) only.
        ============================================================ -->
 
-  <nav>
-    <a href="https://ko-fi.com/parkuma" target="_blank" rel="noopener" style="--c:#ffd6e2; --t:#b02a58">Support Me</a>
-    <a href="https://www.patreon.com/ParKuma" target="_blank" rel="noopener" style="--c:#ffe0c2; --t:#a44f16">Patreon</a>
-    <a href="https://www.instagram.com/parkuma_art" target="_blank" rel="noopener" style="--c:#fff3ba; --t:#8a6900">Instagram</a>
-    <a href="https://x.com/parkuma_art" target="_blank" rel="noopener" style="--c:#c9f2de; --t:#15795a">X (Twitter)</a>
-    <a href="https://bsky.app/profile/parkuma.bsky.social" target="_blank" rel="noopener" style="--c:#d5e7ff; --t:#1c5aa6">BlueSky</a>
-    <a href="https://www.youtube.com/@ParKuma" target="_blank" rel="noopener" style="--c:#e6dcff; --t:#5b3aa8">YouTube</a>
-    <a href="mailto:parkumaofficial@gmail.com" style="--c:#ffdcd0; --t:#a63a20">E-Mail</a>
+  <nav aria-label="ParKuma links">
+    <!-- ko-fi orange -->
+    <a href="https://ko-fi.com/parkuma" target="_blank" rel="noopener" style="--c:#f25c28; --t:#ffffff">Support Me</a>
+
+    <!-- patreon black -->
+    <a href="https://www.patreon.com/ParKuma" target="_blank" rel="noopener" style="--c:#262626; --t:#ffffff">Patreon</a>
+
+    <!-- instagram pink -->
+    <a href="https://www.instagram.com/parkuma_art" target="_blank" rel="noopener" style="--c:#de23a6; --t:#ffffff">Instagram</a>
+
+    <!-- x dark grey -->
+    <a href="https://x.com/parkuma_art" target="_blank" rel="noopener" style="--c:#383838; --t:#ffffff">X (Twitter)</a>
+
+    <!-- bluesky blue -->
+    <a href="https://bsky.app/profile/parkuma.bsky.social" target="_blank" rel="noopener" style="--c:#006afe; --t:#ffffff">BlueSky</a>
+
+    <!-- youtube red -->
+    <a href="https://www.youtube.com/@ParKuma" target="_blank" rel="noopener" style="--c:#ff3232; --t:#ffffff">YouTube</a>
+
+    <!-- coral red -->
+    <a href="mailto:parkumaofficial@gmail.com" style="--c:#fc413c; --t:#ffffff">E-Mail</a>
   </nav>
 
-  <!-- ===================== END EDIT SECTION ===================== -->
-</div>
+  <!-- ===================== END OF LINK BUTTONS ===================== -->
+</main>
 </body>
 </html>
