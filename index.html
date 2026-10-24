@@ -47,7 +47,6 @@
     align-items: center;
   }
 
-  /* Rainbow title — delete this <h1> if you don't want a heading */
   h1 {
     margin: 0 0 26px;
     text-align: center;
@@ -75,6 +74,8 @@
     gap: 14px;
   }
 
+  /* Colours come from each link's own --c (background) and --t (text).
+     The fallbacks below are only used if a link is missing them. */
   nav a {
     display: flex;
     align-items: center;
@@ -86,8 +87,8 @@
     font-weight: 800;
     font-size: 1.1rem;
     line-height: 1.2;
-    color: var(--t);
-    background: var(--c);
+    color: var(--t, #a63a60);
+    background: var(--c, #ffe0e8);
     border: 2px solid rgba(255, 255, 255, .75);
     border-radius: 999px;
     box-shadow: 0 6px 16px rgba(180, 110, 130, .18);
@@ -96,16 +97,7 @@
 
   nav a:hover  { filter: brightness(.96); }
   nav a:active { transform: scale(.98); }
-  nav a:focus-visible { outline: 3px solid var(--t); outline-offset: 3px; }
-
-  /* One colour per button: --c = background, --t = text */
-  nav a:nth-child(1) { --c: #ffd6e2; --t: #b02a58; }  /* pink     */
-  nav a:nth-child(2) { --c: #ffe0c2; --t: #a44f16; }  /* peach    */
-  nav a:nth-child(3) { --c: #fff3ba; --t: #8a6900; }  /* yellow   */
-  nav a:nth-child(4) { --c: #c9f2de; --t: #15795a; }  /* mint     */
-  nav a:nth-child(5) { --c: #d5e7ff; --t: #1c5aa6; }  /* sky blue */
-  nav a:nth-child(6) { --c: #e6dcff; --t: #5b3aa8; }  /* lavender */
-  nav a:nth-child(7) { --c: #ffdcd0; --t: #a63a20; }  /* coral    */
+  nav a:focus-visible { outline: 3px solid var(--t, #a63a60); outline-offset: 3px; }
 
   /* Tablet: two columns */
   @media (min-width: 700px) {
@@ -151,15 +143,39 @@
 <body>
 <div class="wrap">
   <h1>ParKuma</h1>
+
+  <!-- ============================================================
+       EDIT ONLY THIS SECTION
+       ------------------------------------------------------------
+       Each link is ONE line. To add a link: copy any line, paste it,
+       then change 3 things: the URL, the text, and the two colours.
+       To delete a link: delete its whole line.
+       To reorder: cut and paste lines.
+
+       Colours: --c is the background, --t is the text colour.
+       Keep --t dark and --c light so the text stays readable.
+
+       Paste-ready palette:
+         pink      --c:#ffd6e2; --t:#b02a58
+         peach     --c:#ffe0c2; --t:#a44f16
+         yellow    --c:#fff3ba; --t:#8a6900
+         mint      --c:#c9f2de; --t:#15795a
+         sky blue  --c:#d5e7ff; --t:#1c5aa6
+         lavender  --c:#e6dcff; --t:#5b3aa8
+         coral     --c:#ffdcd0; --t:#a63a20
+       ============================================================ -->
+
   <nav>
-    <a href="https://ko-fi.com/parkuma" target="_blank" rel="noopener">Support Me</a>
-    <a href="https://www.patreon.com/ParKuma" target="_blank" rel="noopener">Patreon</a>
-    <a href="https://www.instagram.com/parkuma_art" target="_blank" rel="noopener">Instagram</a>
-    <a href="https://x.com/parkuma_art" target="_blank" rel="noopener">X (Twitter)</a>
-    <a href="https://bsky.app/profile/parkuma.bsky.social" target="_blank" rel="noopener">BlueSky</a>
-    <a href="https://www.youtube.com/@ParKuma" target="_blank" rel="noopener">YouTube</a>
-    <a href="mailto:parkumaofficial@gmail.com">E-Mail</a>
+    <a href="https://ko-fi.com/parkuma" target="_blank" rel="noopener" style="--c:#ffd6e2; --t:#b02a58">Support Me</a>
+    <a href="https://www.patreon.com/ParKuma" target="_blank" rel="noopener" style="--c:#ffe0c2; --t:#a44f16">Patreon</a>
+    <a href="https://www.instagram.com/parkuma_art" target="_blank" rel="noopener" style="--c:#fff3ba; --t:#8a6900">Instagram</a>
+    <a href="https://x.com/parkuma_art" target="_blank" rel="noopener" style="--c:#c9f2de; --t:#15795a">X (Twitter)</a>
+    <a href="https://bsky.app/profile/parkuma.bsky.social" target="_blank" rel="noopener" style="--c:#d5e7ff; --t:#1c5aa6">BlueSky</a>
+    <a href="https://www.youtube.com/@ParKuma" target="_blank" rel="noopener" style="--c:#e6dcff; --t:#5b3aa8">YouTube</a>
+    <a href="mailto:parkumaofficial@gmail.com" style="--c:#ffdcd0; --t:#a63a20">E-Mail</a>
   </nav>
+
+  <!-- ===================== END EDIT SECTION ===================== -->
 </div>
 </body>
 </html>
