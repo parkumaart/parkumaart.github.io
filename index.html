@@ -16,7 +16,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&family=Press+Start+2P&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Space+Mono:wght@400;700&display=swap">
 
 <style>
   /* ================================================================
@@ -26,16 +26,16 @@
     --bg:        #080808;
     --ink:       #ededed;
     --face:      #141414;
-    --face-hi:   #202020;
+    --face-hi:   #222222;
     --face-lo:   #0a0a0a;
-    --line:      #3f3f3f;
+    --line:      #444444;
     --line-hi:   #ffffff;
     --bracket:   #8a8a8a;
     --bracket-hi:#ffffff;
     --glow:      rgba(255, 255, 255, .20);
 
     --font-title: "Press Start 2P", monospace;
-    --font-ui:    "JetBrains Mono", Consolas, "Courier New", monospace;
+    --font-ui:    "Space Mono", Consolas, monospace;
   }
 
   *, *::before, *::after { box-sizing: border-box; }
@@ -47,7 +47,7 @@
     text-size-adjust: 100%;
   }
 
-  /* Custom 8-bit cursor */
+  /* Custom 8-bit retro cursor */
   body {
     margin: 0;
     min-height: 100vh;
@@ -130,19 +130,16 @@
     .tie-1, .tie-2 { animation: none; }
   }
 
-  /* CRT Scanlines & Screen Glass Vignette */
   .scanlines {
     position: fixed;
     inset: 0;
     z-index: 2;
     pointer-events: none;
-    background:
-      radial-gradient(ellipse at center, transparent 65%, rgba(0, 0, 0, .85) 100%),
-      repeating-linear-gradient(
-        to bottom,
-        rgba(255, 255, 255, .03) 0 1px,
-        transparent 1px 3px
-      );
+    background: repeating-linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, .028) 0 1px,
+      transparent 1px 3px
+    );
   }
 
   /* ================================================================
@@ -160,9 +157,9 @@
   h1 {
     margin: 0 0 clamp(28px, 6vw, 48px);
     font-family: var(--font-title);
-    font-size: clamp(1.5rem, 6.5vw, 2.8rem);
+    font-size: clamp(1.6rem, 7vw, 3rem);
     font-weight: 400;
-    line-height: 1.25;
+    line-height: 1.2;
     letter-spacing: .08em;
     text-transform: uppercase;
     text-align: center;
@@ -170,10 +167,10 @@
     user-select: none;
     text-shadow:
       3px 3px 0 #000,
-      0 0 18px rgba(255, 255, 255, .15);
+      0 0 18px rgba(255, 255, 255, .18);
   }
 
-  /* ---- Adaptive Link Container ---- */
+  /* ---- Self-Balancing Adaptive Grid ---- */
   nav {
     width: 100%;
     max-width: 21rem;
@@ -183,20 +180,20 @@
     gap: clamp(12px, 2.5vw, 16px);
   }
 
-  /* ---- Buttons ---- */
+  /* ---- Pixel Button ---- */
   nav a {
     position: relative;
-    flex: 1 1 100%; /* Full width on mobile phones */
+    flex: 1 1 100%; /* Full width on phones */
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 58px;
+    min-height: 60px;
     padding: 14px 20px;
     font-family: var(--font-ui);
-    font-weight: 600;
+    font-weight: 700;
     font-size: clamp(.88rem, 2.4vw, .98rem);
     line-height: 1.3;
-    letter-spacing: .06em;
+    letter-spacing: .08em;
     text-align: center;
     text-decoration: none;
     text-transform: uppercase;
@@ -208,13 +205,13 @@
     cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' shape-rendering='crispEdges'%3E%3Cpath fill='%23000' d='M4 0h3v4h2v1h2v1h2v6h-2v2H7v-2H5V9H4V0z'/%3E%3Cpath fill='%23fff' d='M5 1h1v4h2v1h2v1h2v4h-1v1H8v-1H6V9H5V1z'/%3E%3C/svg%3E"), pointer;
     box-shadow:
       0 3px 0 #000,
-      inset 1px 1px 0 rgba(255, 255, 255, .08);
+      inset 1px 1px 0 rgba(255, 255, 255, .06);
     transition:
-      background-color .1s ease,
-      border-color .1s ease,
-      color .1s ease,
-      box-shadow .1s ease,
-      transform .08s ease;
+      background-color .1s steps(2),
+      border-color .1s steps(2),
+      color .1s steps(2),
+      box-shadow .1s steps(2),
+      transform .08s steps(2);
   }
 
   /* Corner brackets */
@@ -225,7 +222,7 @@
     width: 12px;
     height: 12px;
     border: 2px solid var(--bracket);
-    transition: border-color .1s ease;
+    transition: border-color .1s steps(2);
     pointer-events: none;
   }
   nav a::before {
@@ -257,12 +254,12 @@
     nav a:hover::after  { border-left-color: transparent;  border-top-color: transparent; }
   }
 
-  /* Active press-down effect */
+  /* Push-down active effect */
   nav a:active {
     background: var(--face-lo);
-    transform: translateY(2px);
+    transform: translateY(3px);
     box-shadow:
-      0 1px 0 #000,
+      0 0 0 #000,
       inset 0 0 0 1px rgba(0, 0, 0, .8);
   }
 
@@ -271,39 +268,36 @@
     outline-offset: 4px;
   }
 
-  /* ---- Tablet / Desktop (2 items per row, adapts dynamically) ---- */
+  /* ---- Tablet / Desktop (Clean 2 columns, balances any odd link automatically) ---- */
   @media (min-width: 600px) {
-    nav {
-      max-width: 38rem;
-    }
-    /* calc((100% - gap) / 2): perfectly splits 2 columns */
+    nav { max-width: 38rem; }
     nav a {
       flex: 1 1 calc((100% - 16px) / 2);
-      min-height: 62px;
+      min-height: 64px;
     }
   }
 
   @media (min-width: 1024px) {
     nav { max-width: 44rem; }
-    nav a { min-height: 68px; padding: 16px 24px; font-size: 1rem; }
+    nav a { min-height: 70px; padding: 16px 24px; font-size: 1.02rem; }
   }
 
   @media (min-width: 1600px) {
     nav { max-width: 52rem; }
-    nav a { min-height: 76px; font-size: 1.08rem; }
-    h1 { font-size: 3.4rem; }
+    nav a { min-height: 80px; font-size: 1.1rem; }
+    h1 { font-size: 3.6rem; }
   }
 
-  /* Landscape phones */
+  /* Short landscape phones */
   @media (max-height: 520px) and (orientation: landscape) {
-    body { align-items: flex-start; padding-block: 16px; }
-    h1 { font-size: 1.4rem; margin-bottom: 12px; }
+    body { align-items: flex-start; padding-block: 18px; }
+    h1 { font-size: 1.4rem; margin-bottom: 14px; }
     nav { max-width: 44rem; }
     nav a {
       flex: 1 1 calc((100% - 16px) / 2);
-      min-height: 46px;
+      min-height: 48px;
       padding: 6px 12px;
-      font-size: .82rem;
+      font-size: .84rem;
     }
   }
 
@@ -443,8 +437,7 @@
   <h1>ParKuma</h1>
 
   <!-- ============================================================
-       LINK BUTTONS
-       Add, delete, or rearrange links anytime right here!
+       LINK BUTTONS (Add, delete, or rearrange anytime!)
        ============================================================ -->
   <nav aria-label="ParKuma links">
     <a href="https://ko-fi.com/parkuma" target="_blank" rel="noopener noreferrer">Support Me</a>
@@ -458,19 +451,15 @@
 </main>
 
 <script>
-  /* Native Web Audio API 8-Bit Synthesizer */
+  /* Native Web Audio API 8-Bit Tone Synthesizer */
   let audioCtx = null;
 
   function initAudio() {
-    if (!audioCtx) {
-      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    }
-    if (audioCtx.state === 'suspended') {
-      audioCtx.resume();
-    }
+    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    if (audioCtx.state === 'suspended') audioCtx.resume();
   }
 
-  function play8BitTone(freq, type, duration, vol) {
+  function playTone(freq, type = 'square', duration = 0.04, vol = 0.03) {
     try {
       initAudio();
       const osc = audioCtx.createOscillator();
@@ -487,22 +476,15 @@
 
       osc.start();
       osc.stop(audioCtx.currentTime + duration);
-    } catch (e) {
-      /* Audio gracefully ignored on unsupported devices */
-    }
+    } catch (e) {}
   }
 
-  // Event delegation: dynamically plays sound on all current and future links
-  document.querySelector('nav').addEventListener('mouseover', (e) => {
-    if (e.target.closest('a')) {
-      play8BitTone(420, 'square', 0.04, 0.03);
-    }
+  const nav = document.querySelector('nav');
+  nav.addEventListener('mouseover', (e) => {
+    if (e.target.closest('a')) playTone(420, 'square', 0.04, 0.03);
   });
-
-  document.querySelector('nav').addEventListener('click', (e) => {
-    if (e.target.closest('a')) {
-      play8BitTone(840, 'square', 0.07, 0.06);
-    }
+  nav.addEventListener('click', (e) => {
+    if (e.target.closest('a')) playTone(840, 'square', 0.07, 0.06);
   });
 </script>
 
