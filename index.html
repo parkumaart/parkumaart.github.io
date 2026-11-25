@@ -47,7 +47,6 @@
     text-size-adjust: 100%;
   }
 
-  /* Custom 8-bit retro cursor */
   body {
     margin: 0;
     min-height: 100vh;
@@ -65,7 +64,6 @@
     font-family: var(--font-ui);
     overscroll-behavior-y: contain;
     -webkit-tap-highlight-color: transparent;
-    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' shape-rendering='crispEdges'%3E%3Cpath fill='%23000' d='M0 0v12l3-3h3l3 7h2l-3-7h4z'/%3E%3Cpath fill='%23fff' d='M1 2v8l2-2h3l2 5h1l-2-5h3z'/%3E%3C/svg%3E"), default;
   }
 
   /* ================================================================
@@ -202,7 +200,6 @@
     border: 2px solid var(--line);
     border-radius: 0;
     touch-action: manipulation;
-    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' shape-rendering='crispEdges'%3E%3Cpath fill='%23000' d='M4 0h3v4h2v1h2v1h2v6h-2v2H7v-2H5V9H4V0z'/%3E%3Cpath fill='%23fff' d='M5 1h1v4h2v1h2v1h2v4h-1v1H8v-1H6V9H5V1z'/%3E%3C/svg%3E"), pointer;
     box-shadow:
       0 3px 0 #000,
       inset 1px 1px 0 rgba(255, 255, 255, .06);
@@ -449,44 +446,6 @@
     <a href="mailto:parkumaofficial@gmail.com">E-Mail</a>
   </nav>
 </main>
-
-<script>
-  /* Native Web Audio API 8-Bit Tone Synthesizer */
-  let audioCtx = null;
-
-  function initAudio() {
-    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    if (audioCtx.state === 'suspended') audioCtx.resume();
-  }
-
-  function playTone(freq, type = 'square', duration = 0.04, vol = 0.03) {
-    try {
-      initAudio();
-      const osc = audioCtx.createOscillator();
-      const gain = audioCtx.createGain();
-
-      osc.type = type;
-      osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
-
-      gain.gain.setValueAtTime(vol, audioCtx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
-
-      osc.connect(gain);
-      gain.connect(audioCtx.destination);
-
-      osc.start();
-      osc.stop(audioCtx.currentTime + duration);
-    } catch (e) {}
-  }
-
-  const nav = document.querySelector('nav');
-  nav.addEventListener('mouseover', (e) => {
-    if (e.target.closest('a')) playTone(420, 'square', 0.04, 0.03);
-  });
-  nav.addEventListener('click', (e) => {
-    if (e.target.closest('a')) playTone(840, 'square', 0.07, 0.06);
-  });
-</script>
 
 </body>
 </html>
